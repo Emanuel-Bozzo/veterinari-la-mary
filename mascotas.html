@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas | Veterinaria La Mary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="paginas.css?v=2">
+
+    <script type="module" src="./mascotas.js"></script>
+
+</head>
+
+<body class="pagina-contacto">
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="index.html" class="navbar-brand logo">
+                    🐾 Veterinaria La Mary
+                </a>
+            
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#menuPrincipal"
+                        aria-controls="menuPrincipal"
+                        aria-expanded="false"
+                        aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="institucional.html" class="nav-link">Institucional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contacto.html" class="nav-link">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="mascotas.html" class="nav-link active">Mascotas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="veterinarios.html" class="nav-link">Veterinarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- CONTENIDO -->
+    <main>
+        <section class="container py-5">
+            <div class="row g-4">
+
+                <article class="col-12 col-lg-7">
+                    <span class="etiqueta">MASCOTAS</span>
+                    <h2 class="fs-1 fw-semibold mt-2">
+                        Mascotas registradas
+                        <span class="badge text-bg-secondary align-middle fs-5" id="total">0</span>
+                    </h2>
+
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Dueño</th>
+                                        <th>Color</th>
+                                        <th>Edad</th>
+                                        <th>Peso</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-mascotas">
+                                </tbody>
+                            </table>
+                        </div>
+
+                </article>
+
+                <article class="col-12 col-lg-5">
+
+                        <form class="d-flex flex-column gap-3 p-4 bg-body-tertiary rounded-4" id="form-mascota">
+                            <h3 class="fs-4">Dar de alta</h3>
+
+                            <div>
+                                <label for="nombreMascota" class="form-label">Nombre</label>
+                                <input type="text" name="nombreMascota" id="nombreMascota" class="form-control" required>
+                            </div>
+                            <div>
+                                <label for="nombreDuenio" class="form-label">Dueño</label>
+                                <input type="text" name="nombreDuenio" id="nombreDuenio" class="form-control" required>
+                            </div>
+                            <div>
+                                <label for="color" class="form-label">Color</label>
+                                <input type="text" name="color" id="color" class="form-control" required>
+                            </div>
+                            <div>
+                                <label for="edad" class="form-label">Edad (años)</label>
+                                <input type="number" name="edad" id="edad" class="form-control" max="30" min="0" required>
+                                
+                            </div>
+                            <div>
+                                <label for="peso" class="form-label">Peso (kg)</label>
+                                <input type="number" name="peso" id="peso" class="form-control" step="0.1" min="0" required>
+                            </div>
+
+                            <button class="boton boton-principal w-100" type="submit">Agregar mascota</button>
+                        </form>
+                </article>
+            </div>
+        </section> 
+
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="row g-4 footer-contenido">
+                <div class="col-12 col-md-6">
+                    <h3>🐾 Veterinaria La Mary</h3>
+                    <p>Cuidamos a quienes forman parte de tu familia.</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Contacto</h4>
+                    <p>📍 Paraná, Entre Ríos</p>
+                    <p>📞 0343 - 1234567</p>
+                    <p>✉️ info@veterinarialamary.com</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Veterinaria La Mary. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

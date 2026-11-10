@@ -1,0 +1,239 @@
+/* =========================================
+   INSTITUCIONAL Y CONTACTO
+========================================= */
+
+.pagina-institucional,
+.pagina-contacto {
+    background:
+        linear-gradient(
+            rgba(255, 250, 243, 0.78),
+            rgba(255, 250, 243, 0.88)
+        ),
+        url("mascotas.jpg") center / cover fixed;
+}
+
+/* CONTENIDO GENERAL */
+
+.pagina-contenido {
+    min-height: calc(100vh - 80px);
+    padding: 70px 20px 90px;
+}
+
+.titulo-pagina {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 45px;
+}
+
+.titulo-pagina h1 {
+    color: var(--azul);
+    font-size: clamp(38px, 5vw, 58px);
+    margin: 0 0 12px;
+}
+
+.titulo-pagina p {
+    color: var(--azul);
+    font-size: 19px;
+    margin: 0;
+}
+
+/* =========================================
+   INSTITUCIONAL
+========================================= */
+
+.tarjeta-institucional {
+    width: min(950px, 100%);
+    margin: 0 auto;
+    padding: 45px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 25px;
+    box-shadow: 0 15px 45px rgba(38, 70, 83, 0.18);
+}
+
+.bloque-institucional {
+    padding: 25px 0;
+    border-bottom: 1px solid #e5eeee;
+}
+
+.bloque-institucional:first-child {
+    padding-top: 0;
+}
+
+.icono-institucional {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #dff4ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.bloque-institucional h2,
+.titulo-valores h2 {
+    color: var(--azul);
+    font-size: 27px;
+    margin: 0 0 10px;
+}
+
+.bloque-institucional p {
+    color: var(--gris-texto);
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0 0 8px;
+}
+
+.valores-institucional {
+    padding-top: 30px;
+}
+
+.titulo-valores {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.valor {
+    background: #e7f6f3;
+    border-radius: 18px;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.valor > span {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.valor h3 {
+    color: var(--azul);
+    font-size: 19px;
+    margin: 0 0 8px;
+}
+
+.valor p {
+    color: var(--gris-texto);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* =========================================
+   CONTACTO
+========================================= */
+
+.tarjeta-contacto {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 25px;
+    padding: 40px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 45px rgba(38, 70, 83, 0.18);
+}
+
+.tarjeta-contacto h2 {
+    color: var(--azul);
+    font-size: 30px;
+    margin: 0 0 30px;
+}
+
+.dato-contacto {
+    margin-bottom: 25px;
+}
+
+.icono-contacto {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #dff4ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.dato-contacto h3 {
+    color: var(--azul);
+    font-size: 18px;
+    margin: 0 0 4px;
+}
+
+.dato-contacto p {
+    color: var(--gris-texto);
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.frase-contacto {
+    margin-top: 30px;
+    padding: 20px;
+    background: #e7f6f3;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.frase-contacto p {
+    color: var(--verde-oscuro);
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* FORMULARIO */
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    color: var(--azul);
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .tarjeta-institucional {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .pagina-contenido {
+        padding: 50px 15px 70px;
+    }
+
+    .bloque-institucional {
+        text-align: center;
+    }
+
+    .icono-institucional {
+        margin: 0 auto;
+    }
+
+    .titulo-valores {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tarjeta-contacto {
+        padding: 30px 22px;
+    }
+}
+
+

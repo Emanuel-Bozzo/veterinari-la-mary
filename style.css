@@ -1,0 +1,471 @@
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+:root {
+    --verde: #2a9d8f;
+    --verde-oscuro: #21786e;
+    --verde-claro: #70c1b3;
+
+    --crema: #fffaf3;
+    --crema-oscuro: #f5eee3;
+
+    --azul: #264653;
+
+    --blanco: #ffffff;
+
+    --gris: #f3f7f6;
+    --gris-texto: #657472;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--azul);
+    background-color: var(--crema);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.contenedor {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    background-color: var(--blanco);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--azul);
+    white-space: nowrap;
+}
+
+.navbar-nav .nav-link {
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    color: var(--azul);
+    transition: 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--verde);
+    background-color: #eaf7f5;
+}
+
+.navbar-nav .nav-link.active {
+    background-color: var(--verde);
+    color: var(--blanco);
+}
+
+
+/* =========================
+   PORTADA / HERO
+========================= */
+
+.hero {
+    min-height: 650px;
+
+    background-image:
+        linear-gradient(
+            rgba(38, 70, 83, 0.55),
+            rgba(38, 70, 83, 0.55)
+        ),
+        url("portada.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-contenido {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+    color: var(--blanco);
+    max-width: 720px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.92);
+    color: var(--verde-oscuro);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.08;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    display: block;
+    color: #bcebe4;
+}
+
+.hero p {
+    font-size: 20px;
+    max-width: 650px;
+    margin-bottom: 30px;
+}
+
+.botones {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.boton {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    transition: 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.boton-principal {
+    background-color: var(--verde);
+    color: var(--blanco);
+}
+
+.boton-principal:hover {
+    background-color: var(--verde-oscuro);
+    transform: translateY(-2px);
+}
+
+.boton-secundario {
+    background-color: transparent;
+    color: var(--blanco);
+    border-color: var(--blanco);
+}
+
+.boton-secundario:hover {
+    background-color: var(--blanco);
+    color: var(--azul);
+}
+
+.boton-blanco {
+    background-color: var(--blanco);
+    color: var(--verde-oscuro);
+}
+
+.boton-blanco:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+.seccion {
+    padding: 90px 0;
+}
+
+.titulo-seccion {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 50px;
+}
+
+.titulo-seccion > span {
+    display: inline-block;
+    color: var(--verde);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.titulo-seccion h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+}
+
+.titulo-seccion p {
+    color: var(--gris-texto);
+    font-size: 18px;
+}
+
+
+/* =========================
+   BENEFICIOS
+========================= */
+
+.beneficios {
+    background-color: var(--crema);
+}
+
+.beneficio {
+    background-color: var(--blanco);
+    padding: 40px 30px;
+    text-align: center;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(38, 70, 83, 0.08);
+    transition: 0.3s ease;
+}
+
+.beneficio:hover {
+    transform: translateY(-6px);
+}
+
+.icono {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    background-color: #e5f6f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 35px;
+}
+
+.beneficio h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.beneficio p {
+    color: var(--gris-texto);
+}
+
+
+/* =========================
+   PROFESIONALES
+========================= */
+
+.equipo {
+    background-color: var(--gris);
+}
+
+.profesional {
+    background-color: var(--blanco);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(38, 70, 83, 0.08);
+    transition: 0.3s ease;
+}
+
+.profesional:hover {
+    transform: translateY(-6px);
+}
+
+.profesional img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.profesional .card-body {
+    padding: 25px;
+}
+
+.especialidad {
+    display: inline-block;
+    background-color: #e4f6f3;
+    color: var(--verde-oscuro);
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.profesional h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.profesional p {
+    color: var(--gris-texto);
+}
+
+
+/* =========================
+   MASCOTAS
+========================= */
+
+.mascotas {
+    background-color: var(--crema);
+}
+
+.mascotas-imagen img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(38, 70, 83, 0.12);
+}
+
+.mascotas-texto .etiqueta {
+    background-color: #e4f6f3;
+    color: var(--verde-oscuro);
+}
+
+.mascotas-texto h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.mascotas-texto p {
+    color: var(--gris-texto);
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    background-color: var(--verde);
+    color: var(--blanco);
+    text-align: center;
+    padding: 80px 0;
+}
+
+.cta h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    margin-bottom: 10px;
+}
+
+.cta p {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background-color: var(--azul);
+    color: var(--blanco);
+}
+
+.footer-contenido {
+    padding: 55px 0;
+}
+
+.footer h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.footer h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.footer p {
+    color: #d9e4e6;
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        min-height: 580px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .hero {
+        min-height: 600px;
+        background-position: center;
+    }
+
+    .hero-contenido {
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .botones {
+        justify-content: center;
+    }
+
+    .seccion {
+        padding: 65px 0;
+    }
+
+    .profesional img {
+        height: 280px;
+    }
+
+    .mascotas-imagen img {
+        height: 350px;
+    }
+}
