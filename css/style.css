@@ -101,7 +101,7 @@ a {
             rgba(38, 70, 83, 0.55),
             rgba(38, 70, 83, 0.55)
         ),
-        url("portada.jpg");
+        url("../recursos/portada.jpg");
 
     background-size: cover;
     background-position: center;

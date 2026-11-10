@@ -2,14 +2,14 @@
    INSTITUCIONAL Y CONTACTO
 ========================================= */
 
-.pagina-institucional,
-.pagina-contacto {
+.pagina-institucional,.pagina-contacto 
+{
     background:
         linear-gradient(
             rgba(255, 250, 243, 0.78),
             rgba(255, 250, 243, 0.88)
         ),
-        url("mascotas.jpg") center / cover fixed;
+        url("../recursos/mascotas.jpg") center / cover fixed;
 }
 
 /* CONTENIDO GENERAL */
