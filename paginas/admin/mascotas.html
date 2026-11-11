@@ -88,8 +88,8 @@
 
                 <article class="col-12 col-lg-5">
 
-                        <form class="d-flex flex-column gap-3 p-4 bg-body-tertiary rounded-4" id="form-mascota">
-                            <h3 class="fs-4">Dar de alta</h3>
+                        <form class="d-flex flex-column gap-3 p-4 bg-body-tertiary rounded-4" id="form-mascota" novalidate>
+                            <h3 class="fs-4" id="titulo-form">Dar de alta</h3>
 
                             <div>
                                 <label for="nombreMascota" class="form-label">Nombre</label>
@@ -110,10 +110,13 @@
                             </div>
                             <div>
                                 <label for="peso" class="form-label">Peso (kg)</label>
-                                <input type="number" name="peso" id="peso" class="form-control" step="0.1" min="0" required>
+                                <input type="number" name="peso" id="peso" class="form-control" step="any" min="0" required>
                             </div>
 
-                            <button class="boton boton-principal w-100" type="submit">Agregar mascota</button>
+                            <div id="mensaje-error" class="alert alert-danger d-none" role="alert"></div>
+
+                            <button class="boton boton-principal w-100" type="submit" id="btn-guardar">Agregar mascota</button>
+                            <button class="btn btn-outline-danger w-100 d-none" type="button" id="btn-cancelar">Cancelar edición</button>
                         </form>
                 </article>
             </div>

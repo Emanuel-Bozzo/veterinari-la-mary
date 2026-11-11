@@ -1,62 +1,128 @@
+import { obtener, guardar, generarId } from "../compartido/almacenamiento.js";
+import { crearCelda, crearCeldaBoton, mostrarError, ocultarError } from "../compartido/ui.js";
 
-const formMascota = document.getElementById("form-mascota");
-const tablaMascotas = document.getElementById("tabla-mascotas");
+const CLAVE = "mascotas";
+
+const form = document.getElementById("form-mascota");
+const tabla = document.getElementById("tabla-mascotas");
 const total = document.getElementById("total");
+const tituloForm = document.getElementById("titulo-form");
+const btnGuardar = document.getElementById("btn-guardar");
+const btnCancelar = document.getElementById("btn-cancelar");
+const cuadroError = document.getElementById("mensaje-error");
+
+const inputNombre = document.getElementById("nombreMascota");
+const inputDuenio = document.getElementById("nombreDuenio");
+const inputColor = document.getElementById("color");
+const inputEdad = document.getElementById("edad");
+const inputPeso = document.getElementById("peso");
+
+
 let idEditando = null;
 
 function mostrarMascotas() {
-    // 1. leer el array guardado
-    const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
+    const mascotas = obtener(CLAVE);
 
-    // 2. vaciar el tbody para no duplicar filas
-    tablaMascotas.innerHTML = "";
-
-    // 3. por cada mascota, agregar una fila
+    tabla.innerHTML = "";
+    
     mascotas.forEach(function (mascota) {
-        tablaMascotas.innerHTML += `
-            <tr>
-                <td>${mascota.nombreMascota}</td>
-                <td>${mascota.nombreDuenio}</td>
-                <td>${mascota.color}</td>
-                <td>${mascota.edad} ${mascota.edad === 1 ? "año" : "años"}</td>
-                <td>${mascota.peso} kg</td>
-                <td><button class="btn btn-sm btn-warning" data-id="${mascota.idMascota}">Editar</button></td>
-                <td><button class="btn btn-sm btn-danger" data-id="${mascota.idMascota}">Eliminar</button></td>
-            </tr>
-        `;
+        const fila = document.createElement("tr");
+
+        fila.appendChild(crearCelda(mascota.nombreMascota));
+        fila.appendChild(crearCelda(mascota.nombreDuenio));
+        fila.appendChild(crearCelda(mascota.color));
+        fila.appendChild(crearCelda(mascota.edad + (mascota.edad === 1 ? " año" : " años")));
+        fila.appendChild(crearCelda(mascota.peso + " kg"));
+        fila.appendChild(crearCeldaBoton("Editar", "btn-warning", "editar", mascota.idMascota));
+        fila.appendChild(crearCeldaBoton("Eliminar", "btn-danger", "eliminar", mascota.idMascota));
+
+        tabla.appendChild(fila);
     });
 
-    // 4. actualizar el contador
     total.textContent = mascotas.length;
 }
 
-formMascota.addEventListener("submit", function (evento) {
+// Vuelve el formulario al modo "alta"
+function salirModoEdicion() {
+    idEditando = null;
+    form.reset();
+    ocultarError(cuadroError);
+    tituloForm.textContent = "Dar de alta";
+    btnGuardar.textContent = "Agregar mascota";
+    btnCancelar.classList.add("d-none");
+}
+
+function entrarModoEdicion(mascota) {
+    idEditando = mascota.idMascota;
+
+    inputNombre.value = mascota.nombreMascota;
+    inputDuenio.value = mascota.nombreDuenio;
+    inputColor.value = mascota.color;
+    inputEdad.value = mascota.edad;
+    inputPeso.value = mascota.peso;
+
+    ocultarError(cuadroError);
+    tituloForm.textContent = "Editar mascota";
+    btnGuardar.textContent = "Guardar cambios";
+    btnCancelar.classList.remove("d-none");
+    inputNombre.focus();
+}
+
+form.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const nombreMascota = document.getElementById("nombreMascota").value;
-    const nombreDuenio = document.getElementById("nombreDuenio").value;
-    const color = document.getElementById("color").value;
-    const edad = parseInt(document.getElementById("edad").value);
-    const peso = parseFloat(document.getElementById("peso").value);
+    const nombreMascota = inputNombre.value.trim();
+    const nombreDuenio = inputDuenio.value.trim();
+    const color = inputColor.value.trim();
+    const edadTexto = inputEdad.value.trim();
+    const pesoTexto = inputPeso.value.trim();
 
-    const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
+    // ----- Validaciones -----
+    if (nombreMascota === "" || nombreDuenio === "" || color === "") {
+        mostrarError(cuadroError, "Completá el nombre, el dueño y el color.");
+        return;
+    }
+
+    const edad = Number(edadTexto);
+    const peso = Number(pesoTexto);
+
+    if (edadTexto === "" || !Number.isInteger(edad) || edad < 0 || edad > 30) {
+        mostrarError(cuadroError, "La edad debe ser un número entero entre 0 y 30.");
+        return;
+    }
+
+    if (pesoTexto === "" || isNaN(peso) || peso <= 0) {
+        mostrarError(cuadroError, "El peso debe ser un número mayor a 0.");
+        return;
+    }
+
+    ocultarError(cuadroError);
+
+    const mascotas = obtener(CLAVE);
 
     if (idEditando === null) {
         // ALTA
-        const mascota = {
-            idMascota: crypto.randomUUID(),
+        mascotas.push({
+            idMascota: generarId(),
             nombreMascota: nombreMascota,
             nombreDuenio: nombreDuenio,
             color: color,
             edad: edad,
             peso: peso
-        };
-        mascotas.push(mascota);
+        });
     } else {
         // EDICIÓN
         const indice = mascotas.findIndex(function (m) {
             return m.idMascota === idEditando;  
         });
+
+        if (indice === -1) {
+            // La mascota ya no existe (por ejemplo, se eliminó en otra pestaña)
+            mostrarError(cuadroError, "Esa mascota ya no existe. Se canceló la edición.");
+            salirModoEdicion();
+            mostrarMascotas();
+            return;
+        }    
 
         mascotas[indice] = {
             idMascota: idEditando,
@@ -66,62 +132,49 @@ formMascota.addEventListener("submit", function (evento) {
             edad: edad,
             peso: peso
         };
-
-        idEditando = null;
     }
 
-    localStorage.setItem("mascotas", JSON.stringify(mascotas));
+    guardar(CLAVE, mascotas);
+    salirModoEdicion();
     mostrarMascotas();
-    formMascota.reset();
 });
 
-mostrarMascotas();
+btnCancelar.addEventListener("click", salirModoEdicion);
 
-tablaMascotas.addEventListener("click", function (evento) {
-    const boton = evento.target;
+tabla.addEventListener("click", function (evento) {
+    const boton = evento.target.closest("button");
+    if (boton === null) {
+        return;
+    }
 
-    if (boton.classList.contains("btn-danger")) {
-        const id = boton.dataset.id;
+    const id = boton.dataset.id;
 
-        const confirmar = confirm("¿Seguro que querés eliminar esta mascota?");
-
-        if (confirmar) {
-            // 1. leer el array (igual que en mostrarMascotas)
-            const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
-
-            // 2. quedarte solo con las que tengan un id DISTINTO
-            const filtradas = mascotas.filter(function (m) {
-                return m.idMascota !== id;
-            });
-
-            // 3. guardar el array nuevo (igual que en el alta, pero con "filtradas")
-            localStorage.setItem("mascotas", JSON.stringify(filtradas));
-
-            // 4. redibujar la tabla
-            mostrarMascotas();
+    if (boton.dataset.accion === "editar") {
+        const mascota = obtener(CLAVE).find(function (m) {
+            return m.idMascota === id;
+        });
+        if (mascota) {
+            entrarModoEdicion(mascota);
         }
     }
 
+    if (boton.dataset.accion === "eliminar") {
+        if (!confirm("¿Seguro que querés eliminar esta mascota?")) {
+            return;
+        }
 
-
-    if (boton.classList.contains("btn-warning")) {
-        const id = boton.dataset.id;
-
-        const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
-
-        // 1. buscar la mascota (devuelve el primer elemento que cumple)
-        const mascota = mascotas.find(function (m) {
-            return m.idMascota === id;
+        const restantes = obtener(CLAVE).filter(function (m) {
+            return m.idMascota !== id;
         });
+        guardar(CLAVE, restantes);
 
-        // 2. cargar sus datos en el formulario
-        document.getElementById("nombreMascota").value = mascota.nombreMascota;
-        document.getElementById("nombreDuenio").value = mascota.nombreDuenio;
-        document.getElementById("color").value = mascota.color;
-        document.getElementById("edad").value = mascota.edad;
-        document.getElementById("peso").value = mascota.peso;
+        // Si justo se estaba editando la mascota eliminada, se sale del modo edición
+        if (idEditando === id) {
+            salirModoEdicion();
+        }
 
-        // 3. recordar que estamos editando
-        idEditando = id;
+        mostrarMascotas();
     }
 });
+
+mostrarMascotas();
